@@ -1,6 +1,17 @@
+'use client'
+
+import { newQuery } from '@/repository/chat-service'
 import Image from 'next/image'
+import { useState } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function Home() {
+  const [session] = useState<string>(uuidv4())
+
+  const chat = (message: string) => {
+    newQuery(message, 0.9, session)
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -15,15 +26,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
+            By <Image src="/vercel.svg" alt="Vercel Logo" className="dark:invert" width={100} height={24} priority />
           </a>
         </div>
       </div>
@@ -86,9 +89,7 @@ export default function Home() {
               -&gt;
             </span>
           </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
+          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>Explore the Next.js 13 playground.</p>
         </a>
 
         <a
