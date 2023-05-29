@@ -4,6 +4,7 @@ import { BufferMemory } from 'langchain/memory'
 import { v4 as uuidv4 } from 'uuid'
 import { ConversationChain } from 'langchain/chains'
 import { AIChatMessage, HumanChatMessage } from 'langchain/dist/schema'
+import { generateContext } from './context-service'
 
 export const chatModel = (temperature: number, sessionId: string = uuidv4()) => {
   const history = new RedisChatMessageHistory({
@@ -27,8 +28,14 @@ export const chatModel = (temperature: number, sessionId: string = uuidv4()) => 
 }
 
 export const newQuery = async (prompt: string, temperature: number = 0.9, sessionId: string) => {
+  const context = await generateContext(prompt)
+
+  const messageInput = 'Based on the context: {context} continue with the story about: {prompt}'
+    .replace('{context}', context)
+    .replace('{prompt}', prompt)
+
   const { chain, history } = chatModel(temperature, sessionId)
-  const { text } = await chain.call({ input: prompt })
+  const { text } = await chain.call({ input: messageInput })
 
   history.addMessage(new HumanChatMessage(prompt))
   history.addMessage(new AIChatMessage(text))
