@@ -5,7 +5,7 @@ import LoadingSpinner from './loading-spinner'
 import ChatInputSection from './chat-inputs'
 import ChatMessageSection from './chat-message'
 
-const ChatSection = ({ animal, animals }: { animal: any; animals: Array<any> }) => {
+const ChatSection = ({ animal, animals, sessionId }: { animal: any; animals: Array<any>; sessionId: string }) => {
   const messageList = [
     {
       text: "Hi! I am your guide. Let's go find something new",
@@ -38,7 +38,7 @@ const ChatSection = ({ animal, animals }: { animal: any; animals: Array<any> }) 
       },
       body: JSON.stringify({
         animal: animal,
-        sessionId: '2'
+        sessionId: sessionId
       })
     })
 
@@ -59,7 +59,7 @@ const ChatSection = ({ animal, animals }: { animal: any; animals: Array<any> }) 
       },
       body: JSON.stringify({
         animals: JSON.stringify(animals),
-        sessionId: '2'
+        sessionId: sessionId
       })
     })
 
@@ -80,7 +80,7 @@ const ChatSection = ({ animal, animals }: { animal: any; animals: Array<any> }) 
       },
       body: JSON.stringify({
         question: question,
-        sessionId: '2'
+        sessionId: sessionId
       })
     })
 
