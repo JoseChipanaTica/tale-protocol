@@ -1,44 +1,29 @@
 import { ChatAnthropic } from 'langchain/chat_models/anthropic'
-import { RedisChatMessageHistory } from 'langchain/stores/message/redis'
 import { BufferMemory } from 'langchain/memory'
 import { v4 as uuidv4 } from 'uuid'
 import { ConversationChain } from 'langchain/chains'
-import { AIChatMessage, HumanChatMessage } from 'langchain/dist/schema'
-import { generateContext } from './context-service'
 
 export const chatModel = (temperature: number, sessionId: string = uuidv4()) => {
-  const history = new RedisChatMessageHistory({
-    sessionId: sessionId,
-    sessionTTL: 300,
-    config: {
-      url: process.env['NEXT_PUBLIC_REDIS_URL']
-    }
-  })
-  const memory = new BufferMemory({
-    chatHistory: history
-  })
+  const memory = new BufferMemory()
 
   const model = new ChatAnthropic({
     temperature,
-    apiKey: process.env['NEXT_PUBLIC_ANTHROPIC_KEY']
+    anthropicApiKey: process.env['NEXT_PUBLIC_ANTHROPIC_KEY']
   })
 
   const chain = new ConversationChain({ llm: model, memory })
   return { chain, history }
 }
 
-export const newQuery = async (prompt: string, temperature: number = 0.9, sessionId: string) => {
-  const context = await generateContext(prompt)
+export const newQuery = async (prompt: string, temperature: number = 0.9, sessionId: string | undefined) => {
+  // const context = await generateContext(prompt)
 
-  const messageInput = 'Based on the context: {context} continue with the story about: {prompt}'
-    .replace('{context}', context)
+  const messageInput = 'Write a story about: {prompt}'
+    // .replace('{context}', context)
     .replace('{prompt}', prompt)
 
-  const { chain, history } = chatModel(temperature, sessionId)
+  const { chain } = chatModel(temperature, sessionId)
   const { text } = await chain.call({ input: messageInput })
-
-  history.addMessage(new HumanChatMessage(prompt))
-  history.addMessage(new AIChatMessage(text))
-
+  debugger
   return text
 }

@@ -1,5 +1,5 @@
 import { ChatAnthropic } from 'langchain/chat_models/anthropic'
-import { HumanChatMessage } from 'langchain/dist/schema'
+import { HumanChatMessage } from 'langchain/schema'
 import { text2Embeddings } from './text-service'
 import { findingClosestContextByEmbeddings } from './qdrant-service'
 

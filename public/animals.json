@@ -1,0 +1,37 @@
+[
+  {
+    "position": { "lat": -1.545451, "lng": 21.679452 },
+    "icon": "https://img.icons8.com/doodle/48/lemur.png",
+    "animal": "lemur"
+  },
+  {
+    "position": { "lat": -1.793153, "lng": 21.674643 },
+    "icon": "https://img.icons8.com/color/48/lion.png",
+    "animal": "lion"
+  },
+  {
+    "position": { "lat": -1.695814, "lng": 21.360662 },
+    "icon": "https://img.icons8.com/emoji/48/chipmunk.png",
+    "animal": "squirrel"
+  },
+  {
+    "position": { "lat": -1.353411, "lng": 21.814003 },
+    "icon": "https://img.icons8.com/color/48/gorilla.png",
+    "animal": "monkey"
+  },
+  {
+    "position": { "lat": -1.471748, "lng": 21.426145 },
+    "icon": "https://img.icons8.com/color/48/tapir.png",
+    "animal": "tapir"
+  },
+  {
+    "position": { "lat": -1.55695, "lng": 22.049689 },
+    "icon": "https://img.icons8.com/bubbles/50/red-panda.png",
+    "animal": "red panda"
+  },
+  {
+    "position": { "lat": -1.885453, "lng": 21.723335 },
+    "icon": "https://img.icons8.com/flat-round/64/funny-zebra.png",
+    "animal": "zebra"
+  }
+]
