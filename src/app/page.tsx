@@ -78,7 +78,7 @@ const MapPage = () => {
 
             <MarkerF
               position={{ lat, lng }}
-              icon={'https://tale-protocol.vercel.app/Rangerbg.png'}
+              icon={'https://tale-protocol.vercel.app/icons/Rangerbg.png'}
               draggable={true}
               onDragEnd={e => userMarkerNewPosition(e)}
             />
