@@ -78,9 +78,7 @@ const MapPage = () => {
 
             <MarkerF
               position={{ lat, lng }}
-              icon={
-                'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-park-ranger-professions-men-diversity-flaticons-lineal-color-flat-icons.png'
-              }
+              icon={'https://tale-protocol.vercel.app/Rangerbg.png'}
               draggable={true}
               onDragEnd={e => userMarkerNewPosition(e)}
             />
