@@ -5,10 +5,22 @@ import LoadingSpinner from './loading-spinner'
 import ChatInputSection from './chat-inputs'
 import ChatMessageSection from './chat-message'
 
-const ChatSection = ({ animal, animals, sessionId }: { animal: any; animals: Array<any>; sessionId: string }) => {
+const ChatSection = ({
+  animal,
+  animals,
+  sessionId,
+  setNearbyAnimals,
+  setSelectedAnimal
+}: {
+  animal: any
+  animals: Array<any>
+  sessionId: string
+  setNearbyAnimals: any
+  setSelectedAnimal: any
+}) => {
   const messageList = [
     {
-      text: "Hi! I am your guide. Let's go find something new",
+      text: "Hi! I am your guide. Let's go find something new about Upemba. You are the star, you are the ranger!",
       rol: 'system'
     }
   ]
@@ -45,6 +57,8 @@ const ChatSection = ({ animal, animals, sessionId }: { animal: any; animals: Arr
     const { story } = await response.json()
 
     setMessages(prev => [...prev, { text: story, rol: 'system' }])
+
+    setSelectedAnimal('')
     setIsLoading(false)
   }
 
@@ -66,6 +80,8 @@ const ChatSection = ({ animal, animals, sessionId }: { animal: any; animals: Arr
     const { story } = await response.json()
 
     setMessages(prev => [...prev, { text: story, rol: 'system' }])
+
+    setNearbyAnimals([])
     setIsLoading(false)
   }
 

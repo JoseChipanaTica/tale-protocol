@@ -35,7 +35,7 @@ const MapPage = () => {
     setLat(e.latLng.lat())
     setLng(e.latLng.lng())
     const data = await findNearbyAnimals({ lat: e.latLng.lat(), long: e.latLng.lng() })
-    // setNearbyAnimals(data)
+    setNearbyAnimals(data)
   }
 
   const mapOptions = useMemo<google.maps.MapOptions>(
@@ -76,12 +76,25 @@ const MapPage = () => {
               <MarkerF key={i} position={it.position} icon={it.icon} onClick={() => writeStoryAboutAnimal(it.name)} />
             ))}
 
-            <MarkerF position={{ lat, lng }} draggable={true} onDragEnd={e => userMarkerNewPosition(e)} />
+            <MarkerF
+              position={{ lat, lng }}
+              icon={
+                'https://img.icons8.com/external-flaticons-lineal-color-flat-icons/64/external-park-ranger-professions-men-diversity-flaticons-lineal-color-flat-icons.png'
+              }
+              draggable={true}
+              onDragEnd={e => userMarkerNewPosition(e)}
+            />
           </GoogleMap>
         </div>
 
         <div className="basis-2/4">
-          <ChatSection animal={selectedAnimal} animals={nearbyAnimals} sessionId={session} />
+          <ChatSection
+            animal={selectedAnimal}
+            animals={nearbyAnimals}
+            sessionId={session}
+            setNearbyAnimals={setNearbyAnimals}
+            setSelectedAnimal={setSelectedAnimal}
+          />
         </div>
       </div>
     </div>
