@@ -9,11 +9,11 @@ import ChatSection from './components/chat'
 
 const MapPage = () => {
   const libraries = useMemo(() => ['places'], [])
-  const mapCenter = useMemo(() => ({ lat: -1.484597028352043, lng: 21.722542578125008 }), [])
+  const mapCenter = useMemo(() => ({ lat: -8.937216, lng: 26.517988 }), [])
   const [session] = useState<string>(uuidv4())
 
-  const [lat, setLat] = useState(-1.484597028352043)
-  const [lng, setLng] = useState(21.722542578125008)
+  const [lat, setLat] = useState(-8.937216)
+  const [lng, setLng] = useState(26.517988)
 
   const [animals, setAnimals] = useState<Array<any>>([])
 
@@ -35,7 +35,7 @@ const MapPage = () => {
     setLat(e.latLng.lat())
     setLng(e.latLng.lng())
     const data = await findNearbyAnimals({ lat: e.latLng.lat(), long: e.latLng.lng() })
-    setNearbyAnimals(data)
+    // setNearbyAnimals(data)
   }
 
   const mapOptions = useMemo<google.maps.MapOptions>(
@@ -66,7 +66,7 @@ const MapPage = () => {
         <div className="basis-3/5">
           <GoogleMap
             options={mapOptions}
-            zoom={12}
+            zoom={10}
             center={mapCenter}
             mapTypeId={google.maps.MapTypeId.SATELLITE}
             mapContainerStyle={{ height: '100vh' }}
